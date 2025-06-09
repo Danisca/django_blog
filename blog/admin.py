@@ -14,3 +14,5 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ['author']
     date_hierarchy = 'publish'
     ordering = ['status', 'publish']
+    # Adding facet counts to filters
+    show_facets = admin.ShowFacets.ALWAYS
