@@ -2,7 +2,16 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
-# Create your models here.
+
+# Create a custom object manager
+class PublishedManager(models.Manager):
+    """Custom objects manager for published Posts"""
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(status= Post.Status.PUBLISH)
+
+
+
 class Post(models.Model):
     """Stores the data for posts."""
     class Status(models.TextChoices):
@@ -27,6 +36,10 @@ class Post(models.Model):
         choices= Status,
         default=Status.DRAFT
     )
+
+    #Agregando el custom object manager
+    objects = models.Manager()#default manager
+    published = PublishedManager()
 
     class Meta:
         """Adding some aditional settings to the model."""
