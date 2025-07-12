@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Comment
 
 # CUSTOMIZING THE DJANGO-ADMIN
 @admin.register(Post)
@@ -16,3 +16,12 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ['status', 'publish']
     # Adding facet counts to filters
     show_facets = admin.ShowFacets.ALWAYS
+
+    
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    """Customizing the django-admin for Comment Model."""
+    list_display = ['name', 'email', 'post', 'created', 'active']
+    list_filter = ['active', 'created', 'updated']
+    search_fields = ['name', 'email', 'body']

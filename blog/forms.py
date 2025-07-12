@@ -1,4 +1,5 @@
 from django import forms
+from .models import Comment
 
 class EmailPostForm(forms.Form):
     """Create the form to share posts via email."""
@@ -9,3 +10,11 @@ class EmailPostForm(forms.Form):
         required=False,
         widget= forms.Textarea
     )
+
+
+class CommentForm(forms.ModelForm):
+    """Create the html form for Comment model."""
+    class Meta:
+        model = Comment
+        fields = ['name', 'email', 'body']
+        
