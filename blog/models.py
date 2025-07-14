@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from taggit.managers import TaggableManager
 
 
 # Create a custom object manager
@@ -27,6 +28,9 @@ class Post(models.Model):
         # Make the slug unique for the publication date.
         unique_for_date='publish'
     )
+    #tags field
+    tags = TaggableManager()
+    #author field
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
